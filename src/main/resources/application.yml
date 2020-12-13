@@ -1,0 +1,14 @@
+# server.port=8023
+server.port: 5696
+# lk.application.property1=304
+# lk.application.property2=345
+#lk:
+#  application:
+#    property1: 304
+#    property2: 345
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lk-uk
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: кщще
