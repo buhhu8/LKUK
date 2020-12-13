@@ -26,11 +26,11 @@ public class AuthorizationController {
         resultOfFindingLoginAndPassword = loginAndPassword.entrySet().stream()
                 .anyMatch(x -> x.getKey().equals(request.getLogin()) && x.getValue().equals(md5ApacheExample(request.getPassword())));
 
-        obj.setPairs(resultOfFindingLoginAndPassword == true ? "User was found" : "User not found");
+        obj.setPairs(resultOfFindingLoginAndPassword ? "User was found" : "User not found");
         return obj;
     }
 
-    private static String md5ApacheExample(String text) {
+    private String md5ApacheExample(String text) {
         return DigestUtils.md5DigestAsHex(text.getBytes());
     }
 
