@@ -1,6 +1,6 @@
 package org.lk.controller;
 
-public class GreetingRequest {
+public class AuthorizaitonRequest {
 
     private String login;
     private String password;
