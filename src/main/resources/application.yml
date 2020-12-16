@@ -11,4 +11,4 @@ spring:
     url: jdbc:postgresql://localhost:5432/lk-uk
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: кщще
+    password: 0280829Denis
