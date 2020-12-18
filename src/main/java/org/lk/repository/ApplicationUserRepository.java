@@ -18,21 +18,20 @@ public class ApplicationUserRepository {
         this.factory = factory;
     }
 
-    public ApplicationUserEntity findUserByLogin(String login) {
+    public ApplicationUserEntity findUserById(Integer id) {
         ApplicationUserEntity result = null;
 
         try (Session session = factory.openSession()) {
 
-              result = session.createQuery("from ApplicationUserEntity where login = :login", ApplicationUserEntity.class)
-                    .setParameter("login", login)
+            result = session.createQuery("from ApplicationUserEntity where id = :id", ApplicationUserEntity.class)
+                    .setParameter("id", id)
                     .getSingleResult();
-        }
-        catch (NoResultException exc){
+
+        } catch (NoResultException exc) {
 
         }
         return result;
     }
-
 
 
 }

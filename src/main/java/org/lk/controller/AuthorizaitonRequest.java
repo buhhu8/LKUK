@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class AuthorizaitonRequest {
 
-    private Integer login;
+    private Integer id;
     private String password;
 
 
