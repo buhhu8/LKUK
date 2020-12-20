@@ -16,29 +16,29 @@ public class AuthorizationUserService {
 
     private final ApplicationUserAuthorizationRepository repository;
     private final ApplicationUserRepository repository1;
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public AuthorizationUserService(ApplicationUserAuthorizationRepository repository, ApplicationUserRepository repository1) {
+    public AuthorizationUserService(ApplicationUserAuthorizationRepository repository, ApplicationUserRepository repository1,
+                                    PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.repository1 = repository1;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
     public ApplicationUserEntity authorizeUser(Integer id, String password) {
-
-        String hash;
-        passwordEncoder = new BCryptPasswordEncoder();
         if (id < 1 || !StringUtils.hasLength(password)) {
             throw new IllegalArgumentException("Id or password couldn't be blank");
         }
 
+        PasswordEncoder pe = new BCryptPasswordEncoder();
         UserAuthorizationEntity user = repository.findById(id);
         ApplicationUserEntity user1 = repository1.findUserById(id);
-        hash = passwordEncoder.encode("admin");
-        System.out.println(passwordEncoder.matches(hash, "admin"));
+        String hash = pe.encode("admin");
+        System.out.println(hash);
+        System.out.println(pe.matches( "admin", hash));
 
 //        return user != null && passwordEncoder.matches(user.getPassword(),password);
         return user1;

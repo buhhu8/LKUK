@@ -22,10 +22,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 //HTTP Basic authentication
-                .httpBasic()
-                .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "127.0.0.1/").hasRole("ADMIN")
+                .antMatchers("/**").permitAll()
                 .and()
                 .csrf().disable()
                 .formLogin().disable();
