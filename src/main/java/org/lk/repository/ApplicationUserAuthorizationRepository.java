@@ -5,9 +5,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.lk.model.domain.UserAuthorizationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
+import java.util.List;
 
 @Repository
 public class ApplicationUserAuthorizationRepository {
@@ -20,16 +22,20 @@ public class ApplicationUserAuthorizationRepository {
         this.factory = factory;
     }
 
-    public UserAuthorizationEntity findById(Integer id) {
-        UserAuthorizationEntity result = null;
+    public List<UserAuthorizationEntity> findById(Integer id) {
+        List<UserAuthorizationEntity> result = null;
 
         try (Session session = factory.openSession()) {
 
             result = session.createQuery("from UserAuthorizationEntity where id = :id", UserAuthorizationEntity.class)
                     .setParameter("id", id)
-                    .getSingleResult();
+                    .getResultList();
         } catch (NoResultException exc) {
 
+        }
+        if (result.isEmpty())
+        {
+            result=null;
         }
         return result;
 

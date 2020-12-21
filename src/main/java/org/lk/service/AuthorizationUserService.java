@@ -35,10 +35,10 @@ public class AuthorizationUserService {
             throw new IllegalArgumentException("Id or password couldn't be blank");
         }
 
-        UserAuthorizationEntity user = repository.findById(id);
-        ApplicationUserEntity user1 = repository1.findUserById(id);
+        UserAuthorizationEntity user = repository.findById(id).get(0);
+        ApplicationUserEntity user1 = repository1.findUserById(id).get(0);
         hash = passwordEncoder.encode("admin");
-        System.out.println(passwordEncoder.matches(hash, "admin"));
+        System.out.println(passwordEncoder.matches("admin", hash));
 
 //        return user != null && passwordEncoder.matches(user.getPassword(),password);
         return user1;

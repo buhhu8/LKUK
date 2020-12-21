@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
+import java.util.List;
 
 @Repository
 public class ApplicationUserRepository {
@@ -18,18 +19,24 @@ public class ApplicationUserRepository {
         this.factory = factory;
     }
 
-    public ApplicationUserEntity findUserById(Integer id) {
-        ApplicationUserEntity result = null;
+    public List<ApplicationUserEntity> findUserById(Integer id) {
+        List<ApplicationUserEntity> result = null;
 
         try (Session session = factory.openSession()) {
 
             result = session.createQuery("from ApplicationUserEntity where id = :id", ApplicationUserEntity.class)
                     .setParameter("id", id)
-                    .getSingleResult();
+                    .getResultList();
 
         } catch (NoResultException exc) {
 
         }
+
+        if (result.isEmpty())
+        {
+            result=null;
+        }
+
         return result;
     }
 

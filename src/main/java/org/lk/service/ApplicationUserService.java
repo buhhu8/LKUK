@@ -18,7 +18,7 @@ public class ApplicationUserService {
 
     public boolean authorizeUser(Integer id) {
 
-        ApplicationUserEntity user = repository.findUserById(id);
+        ApplicationUserEntity user = repository.findUserById(id).get(0);
 
         return user != null;
 
