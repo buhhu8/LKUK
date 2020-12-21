@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("userAuthorizationController")
-@RequestMapping("/authorization")
+@RequestMapping("/api/v1/authorization")
 public class AuthorizationController {
 
 
@@ -29,7 +29,7 @@ public class AuthorizationController {
         result = service.authorizeUser(request.getId(), request.getPassword());
 
         Greeting obj = new Greeting();
-        obj.setPairs(result.toString());
+        // obj.setPairs(result.toString());
         return obj;
 
     }
