@@ -1,9 +1,6 @@
 package org.lk.model.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@ToString
 @Table(name = "user_authorization_table")
 public class UserAuthorizationEntity {
 

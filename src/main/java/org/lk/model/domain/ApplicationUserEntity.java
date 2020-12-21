@@ -2,11 +2,13 @@ package org.lk.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "application_user_table")
@@ -20,15 +22,6 @@ public class ApplicationUserEntity {
     private String first_name;
     private Date birthDate;
 
-    @Override
-    public String toString() {
-        return "ApplicationUserEntity{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
+
 }
 

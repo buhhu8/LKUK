@@ -15,13 +15,9 @@ public class ApplicationUserService {
         this.repository = repository;
     }
 
-
     public boolean authorizeUser(Integer id) {
-
         ApplicationUserEntity user = repository.findUserById(id).get(0);
-
         return user != null;
-
     }
 
 }

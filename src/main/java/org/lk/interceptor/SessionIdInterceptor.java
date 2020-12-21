@@ -16,7 +16,7 @@ public class SessionIdInterceptor implements HandlerInterceptor {
         System.out.println("SessionID: " + sessionIdHeader);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-        return false; // true - запрос прошел проверку, false - нет
+        return true; // true - запрос прошел проверку, false - нет
     }
 
 }

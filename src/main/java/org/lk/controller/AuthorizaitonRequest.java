@@ -10,5 +10,4 @@ public class AuthorizaitonRequest {
     private Integer id;
     private String password;
 
-
 }

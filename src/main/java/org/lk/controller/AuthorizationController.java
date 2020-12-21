@@ -12,27 +12,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/authorization")
 public class AuthorizationController {
 
-
     private final AuthorizationUserService service;
     private ApplicationUserEntity result;
-
 
     @Autowired
     public AuthorizationController(AuthorizationUserService service) {
         this.service = service;
     }
 
-
     @PostMapping("/login/bd1")
     public Greeting authorizateUser(@RequestBody AuthorizaitonRequest request) {
-
-        result = service.authorizeUser(request.getId(), request.getPassword());
-
         Greeting obj = new Greeting();
-        // obj.setPairs(result.toString());
+        result = service.authorizeUser(request.getId(), request.getPassword());
+        if (result != null) {
+            obj.setPairs(result.toString());
+        } else {
+            obj.setPairs("Not find");
+        }
         return obj;
 
     }
-
-
 }
