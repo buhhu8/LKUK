@@ -27,7 +27,7 @@ public class AuthorizationController {
         if (result != null) {
             obj.setPairs(result.toString());
         } else {
-            obj.setPairs("Not find");
+            obj.setPairs("User not found");
         }
         return obj;
 

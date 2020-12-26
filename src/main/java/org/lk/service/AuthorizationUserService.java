@@ -29,13 +29,20 @@ public class AuthorizationUserService {
         if (id < 1 || !StringUtils.hasLength(password)) {
             throw new IllegalArgumentException("Id or password couldn't be blank");
         }
+        try{
+            UserAuthorizationEntity user = repository.findById(id).get(0);
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                user1 = repository1.findUserById(id).get(0);
 
-        UserAuthorizationEntity user = repository.findById(id).get(0);
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            user1 = repository1.findUserById(id).get(0);
-        } else {
-            user1 = null;
+
+            } else {
+                user1 = null;
+            }    
         }
+        catch (NullPointerException exc){
+            user1=null;
+        }
+        
 
         return user1;
     }
