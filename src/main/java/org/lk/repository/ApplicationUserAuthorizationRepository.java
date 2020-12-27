@@ -27,6 +27,7 @@ public class ApplicationUserAuthorizationRepository {
             result = session.createQuery("from UserAuthorizationEntity where id = :id", UserAuthorizationEntity.class)
                     .setParameter("id", id)
                     .getResultList();
+            // result.isEmpty() ? null : result.get(0);
         }
         if (result.isEmpty()) {
             result = null;

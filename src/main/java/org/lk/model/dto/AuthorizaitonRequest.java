@@ -1,4 +1,4 @@
-package org.lk.controller;
+package org.lk.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

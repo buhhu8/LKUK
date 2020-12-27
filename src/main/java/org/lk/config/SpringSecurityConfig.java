@@ -13,7 +13,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        PasswordEncoder pe =  new BCryptPasswordEncoder();
+        System.out.println(pe.encode("admin"));
+        return pe;
     }
 
     // Secure the endpoins with HTTP Basic authentication

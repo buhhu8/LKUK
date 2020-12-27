@@ -1,50 +1,41 @@
 package org.lk.service;
 
+import lombok.RequiredArgsConstructor;
 import org.lk.model.domain.ApplicationUserEntity;
 import org.lk.model.domain.UserAuthorizationEntity;
+import org.lk.model.dto.ApplicationUser;
 import org.lk.repository.ApplicationUserAuthorizationRepository;
 import org.lk.repository.ApplicationUserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorizationUserService {
 
     private final ApplicationUserAuthorizationRepository repository;
-    private final ApplicationUserRepository repository1;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public AuthorizationUserService(ApplicationUserAuthorizationRepository repository, ApplicationUserRepository repository1,
-                                    PasswordEncoder passwordEncoder) {
-        this.repository = repository;
-        this.repository1 = repository1;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    public ApplicationUserEntity authorizeUser(Integer id, String password) {
-        ApplicationUserEntity user1;
+    public boolean authorizeUser(Integer id, String password) {
         if (id < 1 || !StringUtils.hasLength(password)) {
             throw new IllegalArgumentException("Id or password couldn't be blank");
         }
+
         try{
+            // TODO: use Optional
             UserAuthorizationEntity user = repository.findById(id).get(0);
-            if (passwordEncoder.matches(password, user.getPassword())) {
-                user1 = repository1.findUserById(id).get(0);
-
-
-            } else {
-                user1 = null;
-            }    
+            return passwordEncoder.matches(password, user.getPassword());
+//                ApplicationUserEntity userEntity = applicationUserRepository.findUserById(id).get(0);
+                // all fields from ApplicationUserEntity and put them into ApplicationUser
+//                return modelMapper.map(userEntity, ApplicationUser.class);
+//            }
         }
         catch (NullPointerException exc){
-            user1=null;
+            return false;
         }
-        
-
-        return user1;
     }
 
 
