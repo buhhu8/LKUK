@@ -10,12 +10,12 @@ import javax.persistence.*;
 @Getter
 @Entity
 @ToString
-@Table(name = "user_authorization_table")
+@Table(name = "user_authorization")
 public class UserAuthorizationEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String login;
     private String password;
 
 

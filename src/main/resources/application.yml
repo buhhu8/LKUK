@@ -8,7 +8,7 @@ server.port: 5696
 #    property2: 345
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/private-office
+    url: jdbc:postgresql://localhost:5432/project-lk-uk
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: root
+    password: 0280829Denis

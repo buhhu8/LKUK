@@ -6,7 +6,7 @@ import org.lk.model.domain.UserAuthorizationEntity;
 import org.lk.model.dto.ApplicationUser;
 import org.lk.repository.ApplicationUserAuthorizationRepository;
 import org.lk.repository.ApplicationUserRepository;
-import org.modelmapper.ModelMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
