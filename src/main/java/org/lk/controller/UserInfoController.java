@@ -2,6 +2,7 @@ package org.lk.controller;
 
 import lombok.AllArgsConstructor;
 import org.lk.model.domain.UserInfoEntity;
+import org.lk.model.dto.UserInfoDto;
 import org.lk.model.dto.UserInfoRequest;
 import org.lk.service.UserInfoService;
 import org.lk.service.UserSesionService;
@@ -21,7 +22,9 @@ public class UserInfoController {
     @PostMapping("/userinfo")
     public Greeting findUser(@RequestBody UserInfoRequest request){
 
-       UserInfoEntity user =  userInfoService.showUserInfo(request.getId());
+     //  UserInfoEntity user =  userInfoService.showUserInfo(request.getId());
+        UserInfoDto user = userInfoService.findUserInfo(request.getId());
+        userInfoService.addSomeInfo(user, "Тут живет хороший человек");
        Greeting obj = new Greeting();
        obj.setPairs(user.toString());
        return obj;
