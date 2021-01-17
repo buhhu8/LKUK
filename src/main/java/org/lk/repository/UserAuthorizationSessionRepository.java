@@ -38,7 +38,7 @@ public class UserAuthorizationSessionRepository {
     public Optional<AuthorizationSessionEntity> findBySessionId(String id){
         try (Session session = sessionFactory.openSession()) {
             List<AuthorizationSessionEntity> sessions = session.createQuery("from AuthorizationSessionEntity where sessionId = :id", AuthorizationSessionEntity.class)
-                    .setParameter("sessionId", id)
+                    .setParameter("id", id)
                     .getResultList();
             return sessions.isEmpty() ? Optional.empty() : Optional.ofNullable(sessions.get(0));
         }

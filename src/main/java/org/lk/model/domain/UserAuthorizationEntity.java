@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @ToString
-@Table(name = "user_authorization")
+@Table(name = "user_authorization_table")
 public class UserAuthorizationEntity {
 
     @Id

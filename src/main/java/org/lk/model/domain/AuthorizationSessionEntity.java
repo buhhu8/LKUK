@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(name = "authorizaton_session")
+@Table(name = "authorization_session")
 public class AuthorizationSessionEntity {
 
     @Id

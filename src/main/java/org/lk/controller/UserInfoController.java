@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/authorization/session")
+@RequestMapping("/api/v1/session")
 public class UserInfoController {
     private final UserInfoService userInfoService;
 
@@ -29,4 +29,16 @@ public class UserInfoController {
        obj.setPairs(user.toString());
        return obj;
     }
+
+    @PostMapping("/userinfo/find")
+    public Greeting findUserBySmth(@RequestBody UserInfoRequest request){
+
+        //  UserInfoEntity user =  userInfoService.showUserInfo(request.getId());
+        UserInfoDto user = userInfoService.findUserByFlat(request.getFlat());
+        userInfoService.addSomeInfo(user, "Тут живет хороший человек");
+        Greeting obj = new Greeting();
+        obj.setPairs(user.toString());
+        return obj;
+    }
+
 }
