@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name  ="electricity")
+@Table(name = "electricity")
 
 public class ElectricityEntity {
 
@@ -25,5 +25,5 @@ public class ElectricityEntity {
     private LocalDate electricityDate;
 
 
-
 }
+

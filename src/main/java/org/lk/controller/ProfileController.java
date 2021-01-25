@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/user/profile")
-public class UserProfileController {
+public class ProfileController {
 
     @PostMapping
     public void fillUserProfile() {
@@ -14,3 +14,4 @@ public class UserProfileController {
     }
 
 }
+

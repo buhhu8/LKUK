@@ -1,11 +1,9 @@
 package org.lk.model.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-public class UserAuthorizationRequest {
+@Data
+public class AuthorizationDto {
 
     private Integer id;
     private String login;

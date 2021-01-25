@@ -2,7 +2,9 @@ package org.lk.model.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,8 +12,9 @@ import javax.persistence.*;
 @Getter
 @Entity
 @ToString
-@Table(name = "user_authorization_table")
-public class UserAuthorizationEntity {
+@Table(name = "user_authorization")
+
+public class AuthorizationEntity {
 
     @Id
     private Integer id;
@@ -20,3 +23,4 @@ public class UserAuthorizationEntity {
 
 
 }
+

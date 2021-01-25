@@ -1,6 +1,5 @@
 package org.lk.config;
 
-import lombok.AllArgsConstructor;
 import org.lk.interceptor.SessionCreateInterceptor;
 import org.lk.interceptor.SessionIdInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
