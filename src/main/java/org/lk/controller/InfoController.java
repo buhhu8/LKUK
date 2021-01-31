@@ -18,7 +18,7 @@ public class InfoController {
     @PostMapping("/userinfo")
     public Greeting findUser(@RequestBody InfoDto request) {
 
-        InfoDto user = infoService.findUserById(request.getId());
+        InfoDto user = infoService.convertToDto(infoService.findUserById(request.getId()));
         infoService.addSomeInfo(user, "Тут живет хороший человек");
         Greeting obj = new Greeting();
         obj.setPairs(user.toString());
@@ -28,11 +28,12 @@ public class InfoController {
     @PostMapping("/userinfo/find")
     public Greeting findUserBySmth(@RequestBody InfoDto request) {
 
-        InfoDto user = infoService.findUserByFlat(request.getFlat());
+        InfoDto user = infoService.convertToDto(infoService.findUserByFlat(request.getFlat()));
         infoService.addSomeInfo(user, "Тут живет хороший человек");
         Greeting obj = new Greeting();
         obj.setPairs(user.toString());
         return obj;
     }
+
 
 }

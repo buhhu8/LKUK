@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Личные данные</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Личные данные</h1>
+
+<p>Id: <span th:text="${someInfo.id}"></span>.</p>
+<p>First Name: <span th:text="${someInfo.firstName}"></span>.</p>
+<p>Last Name: <span th:text="${someInfo.lastName}"></span>.</p>
+<p>Middle Name:<span th:text="${someInfo.middleName}"></span>.</p>
+<p>Flat: <span th:text="${someInfo.flat}"></span>.</p>
+<br>
+<a href = "/" class="button"> На главную </a>
+
+
+</body>
+</html>

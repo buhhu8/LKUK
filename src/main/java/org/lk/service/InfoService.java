@@ -20,20 +20,29 @@ public class InfoService {
     private final ModelMapper modelMapper;
 
 
-    public InfoDto findUserById(Integer id) {
-        Optional<InfoEntity> optional = jpaUserInfoRepository.findById(id);
-        return convertToDto(optional);
+    public Optional<InfoEntity> findUserById(Integer id) {
+        return jpaUserInfoRepository.findById(id);
     }
 
     @Transactional
-    public InfoDto findUserByFlat(String flat) {
-        Optional<InfoEntity> optional = jpaUserInfoRepository.findByFlat(flat);
-        return convertToDto(optional);
+    public Optional<InfoEntity> findUserByFlat(String flat) {
+        return jpaUserInfoRepository.findByFlat(flat);
+
     }
 
     public void addSomeInfo(InfoDto infoDto, String someInfo) {
         infoDto.setSomeInfo(someInfo);
 
+    }
+
+    public InfoDto insertData(Integer id, String firstName, String lastName, String middleName, String flat) {
+        InfoDto dto = new InfoDto();
+        dto.setId(id);
+        dto.setFirstName(firstName);
+        dto.setLastName(lastName);
+        dto.setMiddleName(middleName);
+        dto.setFlat(flat);
+        return dto;
     }
 
     public InfoDto convertToDto(Optional<InfoEntity> post) {

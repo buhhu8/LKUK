@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface JpaUserAuthorizationRepository
         extends JpaRepository<AuthorizationEntity, Integer> {
 
-    Optional<AuthorizationEntity> findById(Integer id);
+    Optional<AuthorizationEntity> findByLogin(String login);
 }

@@ -18,13 +18,30 @@ public class AuthorizationService {
     private final ModelMapper modelMapper;
     private JpaUserAuthorizationRepository jpaUserAuthorizationRepository;
 
-    public Boolean checkAuthorization(Integer id, String login, String password) {
-        Optional<AuthorizationEntity> optional = jpaUserAuthorizationRepository.findById(id);
+    public Boolean checkAuthorization(String login, String password) {
+        Optional<AuthorizationEntity> optional = jpaUserAuthorizationRepository.findByLogin(login);
         return optional.get().getLogin().equals(login) && passwordEncoder.matches(password, optional.get().getPassword());
+    }
+
+    public Integer returnId(String login) {
+        return jpaUserAuthorizationRepository.findByLogin(login).get().getId();
     }
 
     public AuthorizationDto convertToDto(Optional<AuthorizationEntity> post) {
         AuthorizationDto postDto = modelMapper.map(post.get(), AuthorizationDto.class);
         return postDto;
+    }
+
+    public AuthorizationEntity convertToEntity(Optional<AuthorizationDto> post) {
+        AuthorizationEntity postEntity = modelMapper.map(post.get(), AuthorizationEntity.class);
+        return postEntity;
+    }
+
+    public AuthorizationDto insertData(Integer id, String login, String password) {
+        AuthorizationDto dto = new AuthorizationDto();
+        dto.setId(id);
+        dto.setLogin(login);
+        dto.setPassword(password);
+        return dto;
     }
 }

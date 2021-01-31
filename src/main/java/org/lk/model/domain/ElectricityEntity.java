@@ -24,6 +24,5 @@ public class ElectricityEntity {
     private String nightElectricity;
     private LocalDate electricityDate;
 
-
 }
 

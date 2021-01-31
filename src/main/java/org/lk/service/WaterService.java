@@ -16,7 +16,7 @@ public class WaterService {
     private final JpaWaterRepository jpaWaterRepository;
     private final ModelMapper modelMapper;
 
-    public WaterDto finById (Integer id){
+    public WaterDto finById(Integer id) {
         Optional<WaterEntity> optional = jpaWaterRepository.findById(id);
         return convertToDto(optional);
     }

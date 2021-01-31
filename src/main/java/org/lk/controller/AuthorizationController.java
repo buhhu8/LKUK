@@ -23,7 +23,7 @@ public class AuthorizationController {
     public ResponseEntity<Object> authorizeUser(@RequestBody AuthorizationDto request) {
 
 
-        if (!authorizationService.checkAuthorization(request.getId(), request.getLogin(), request.getPassword())) {
+        if (!authorizationService.checkAuthorization(request.getLogin(), request.getPassword())) {
 
             return ResponseEntity.status(401).build(); // 401 Unauthorized
         }
