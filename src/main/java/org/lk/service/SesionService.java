@@ -18,20 +18,21 @@ public class SesionService {
     private final JpaSessionRepository jpaSessionRepository;
     private final SessionDto sessionDto;
     private final ModelMapper modelMapper;
+    private final AuthorizationService authorizationService;
 
-    public void SaveSessionId(Integer id) {
-        jpaSessionRepository.save(convertToEntity(fillSessionDto(id)));
+    public void SaveSessionId(String login) {
+        jpaSessionRepository.save(convertToEntity(fillSessionDto(login)));
     }
 
     public String generateSessionId() {
         return UUID.randomUUID().toString();
     }
 
-    public Optional<SessionDto> fillSessionDto(Integer id) {
-        sessionDto.setUserId(id);
+    public SessionDto fillSessionDto(String login) {
+        sessionDto.setUserId(authorizationService.returnId(login));
         sessionDto.setSessionId(generateSessionId());
         sessionDto.setAuthorizationExpiredDate(LocalDate.now().plusDays(1));
-        return Optional.of(sessionDto);
+        return sessionDto;
 
     }
 
@@ -41,8 +42,8 @@ public class SesionService {
         return postDto;
     }
 
-    public AuthorizationSessionEntity convertToEntity(Optional<SessionDto> post) {
-        AuthorizationSessionEntity postEntity = modelMapper.map(post.get(), AuthorizationSessionEntity.class);
+    public AuthorizationSessionEntity convertToEntity(SessionDto post) {
+        AuthorizationSessionEntity postEntity = modelMapper.map(post, AuthorizationSessionEntity.class);
         return postEntity;
     }
 

@@ -28,7 +28,7 @@ public class AuthorizationController {
             return ResponseEntity.status(401).build(); // 401 Unauthorized
         }
 
-        sesionService.SaveSessionId(request.getId());
+        sesionService.SaveSessionId(request.getLogin());
         return ResponseEntity.ok()
 //                .header("SESSION-ID", sessionId)
                 .build(); // 200 with empty body

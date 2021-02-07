@@ -26,8 +26,8 @@ public class WaterService {
         return postDto;
     }
 
-    public WaterEntity convertToEntity(Optional<WaterDto> post) {
-        WaterEntity postEntity = modelMapper.map(post.get(), WaterEntity.class);
+    public WaterEntity convertToEntity(WaterDto post) {
+        WaterEntity postEntity = modelMapper.map(post, WaterEntity.class);
         return postEntity;
     }
 

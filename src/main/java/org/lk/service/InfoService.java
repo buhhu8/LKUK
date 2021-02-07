@@ -50,10 +50,11 @@ public class InfoService {
         return postDto;
     }
 
-    public InfoEntity convertToEntity(Optional<InfoDto> post) {
-        InfoEntity postEntity = modelMapper.map(post.get(), InfoEntity.class);
+    public InfoEntity convertToEntity(InfoDto post) {
+        InfoEntity postEntity = modelMapper.map(post, InfoEntity.class);
         return postEntity;
     }
+
 
 
 }

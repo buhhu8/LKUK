@@ -32,8 +32,8 @@ public class AuthorizationService {
         return postDto;
     }
 
-    public AuthorizationEntity convertToEntity(Optional<AuthorizationDto> post) {
-        AuthorizationEntity postEntity = modelMapper.map(post.get(), AuthorizationEntity.class);
+    public AuthorizationEntity convertToEntity(AuthorizationDto post) {
+        AuthorizationEntity postEntity = modelMapper.map(post, AuthorizationEntity.class);
         return postEntity;
     }
 
