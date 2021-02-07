@@ -33,7 +33,7 @@ public class WebAuthController {
 
         if (authorizationService.checkAuthorization(dto.getLogin(), dto.getPassword())) {
             {
-                sesionService.SaveSessionId(1);
+                sesionService.saveSessionId(1);
                 return "menu";
             }
 

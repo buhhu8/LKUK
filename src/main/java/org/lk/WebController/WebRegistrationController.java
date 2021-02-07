@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Optional;
 
+// controllers
+//      .pages
+//          @Controller - обычные
+//      .rest
+//          @RestController - это @Controller + @ResponseBody
 @Controller
 @AllArgsConstructor
 public class WebRegistrationController {
@@ -31,12 +36,26 @@ public class WebRegistrationController {
 
     @RequestMapping(value = "/registrationForm", method = RequestMethod.POST)
     public String userRegistration(Model model, @ModelAttribute InfoAndAuthDto infoDto) {
+        // registrationService.register(...);
+        // authService.authorizeRegisteredUser(...);
+        // return "menu";
+
         String codePassword = passwordEncoder.encode(infoDto.getPassword());
-        InfoEntity infoEntity = infoService.convertToEntity(Optional.of(infoService.insertData(infoDto.getId(), infoDto.getFirstName(), infoDto.getLastName(), infoDto.getMiddleName(), infoDto.getFlat())));
+
+        // TODO: Remove Optional usage. It's redundant for this case because insertData method always returns non-null value
+        InfoEntity infoEntity = infoService.convertToEntity(
+                Optional.of(infoService.insertData(infoDto.getId(), infoDto.getFirstName(), infoDto.getLastName(), infoDto.getMiddleName(), infoDto.getFlat())));
+
+        // TODO: Replace this to service layer
         jpaUserInfoRepository.save(infoEntity);
-        AuthorizationEntity authorizationEntity = authorizationService.convertToEntity(Optional.of(authorizationService.insertData(infoDto.getId(), infoDto.getLogin(), codePassword)));
+
+        AuthorizationEntity authorizationEntity = authorizationService
+                .convertToEntity(Optional.of(authorizationService.insertData(infoEntity.getId(), infoDto.getLogin(), codePassword)));
+        // TODO: Replace this to service layer
         jpaUserAuthorizationRepository.save(authorizationEntity);
-        sesionService.SaveSessionId(infoDto.getId());
+
+        sesionService.saveSessionId(infoEntity.getId());
+
         return "menu";
 
     }

@@ -37,7 +37,7 @@ public class InfoService {
 
     public InfoDto insertData(Integer id, String firstName, String lastName, String middleName, String flat) {
         InfoDto dto = new InfoDto();
-        dto.setId(id);
+        // dto.setId(id);
         dto.setFirstName(firstName);
         dto.setLastName(lastName);
         dto.setMiddleName(middleName);

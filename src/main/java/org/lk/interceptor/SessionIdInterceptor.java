@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 public class SessionIdInterceptor implements HandlerInterceptor {
 
-    private final SesionService sessionService;
+    private final SesionService innerCacheSessionService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String sessionIdHeader = request.getHeader("SESSION-ID");
 
-        if (sessionService.isExpired(sessionIdHeader)) {
+        if (innerCacheSessionService.isExpired(sessionIdHeader)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
