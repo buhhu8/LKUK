@@ -1,34 +1,22 @@
 package org.lk.service;
 
-import lombok.AllArgsConstructor;
-import org.lk.model.domain.WaterEntity;
+import lombok.RequiredArgsConstructor;
 import org.lk.model.dto.WaterDto;
 import org.lk.repository.jpa.JpaWaterRepository;
-import org.modelmapper.ModelMapper;
+import org.lk.service.converter.WaterConverter;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WaterService {
 
     private final JpaWaterRepository jpaWaterRepository;
-    private final ModelMapper modelMapper;
+    private final WaterConverter waterConverter;
 
     public WaterDto finById(Integer id) {
-        Optional<WaterEntity> optional = jpaWaterRepository.findById(id);
-        return convertToDto(optional);
-    }
 
-    public WaterDto convertToDto(Optional<WaterEntity> post) {
-        WaterDto postDto = modelMapper.map(post.get(), WaterDto.class);
-        return postDto;
-    }
+        return waterConverter.toDto(jpaWaterRepository.findById(id).get());
 
-    public WaterEntity convertToEntity(WaterDto post) {
-        WaterEntity postEntity = modelMapper.map(post, WaterEntity.class);
-        return postEntity;
     }
 
 }

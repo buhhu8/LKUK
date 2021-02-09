@@ -25,7 +25,7 @@ public class WaterEntity {
     private String hot;
     @Column(name = "cold")
     private String cold;
-    @Column(name = "date_statement_water")
+    @Column(name = "datewater")
     private LocalDate dateWater;
 
 

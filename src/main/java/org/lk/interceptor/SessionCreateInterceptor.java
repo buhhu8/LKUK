@@ -13,14 +13,11 @@ public class SessionCreateInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         if (response.getStatus() == HttpServletResponse.SC_OK) {
             // должны в headed добавить session_id
-            System.out.println();
-
-
             // 1 param - header name
             // 2 param - header value
             // response.addHeader();
         }
-        System.out.println();
+
     }
 
 }

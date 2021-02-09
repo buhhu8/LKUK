@@ -27,21 +27,5 @@ public class AuthorizationService {
         return jpaUserAuthorizationRepository.findByLogin(login).get().getId();
     }
 
-    public AuthorizationDto convertToDto(Optional<AuthorizationEntity> post) {
-        AuthorizationDto postDto = modelMapper.map(post.get(), AuthorizationDto.class);
-        return postDto;
-    }
 
-    public AuthorizationEntity convertToEntity(AuthorizationDto post) {
-        AuthorizationEntity postEntity = modelMapper.map(post, AuthorizationEntity.class);
-        return postEntity;
-    }
-
-    public AuthorizationDto insertData(Integer id, String login, String password) {
-        AuthorizationDto dto = new AuthorizationDto();
-        dto.setId(id);
-        dto.setLogin(login);
-        dto.setPassword(password);
-        return dto;
-    }
 }

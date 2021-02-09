@@ -15,6 +15,7 @@ public interface JpaUserInfoRepository
 
     Optional<InfoEntity> findByFlat(String flat);
 
+
     Collection<InfoEntity> findAllByFirstNameAndLastName(String firstName, String lastName);
 
     Optional<InfoEntity> findById(Integer id);
