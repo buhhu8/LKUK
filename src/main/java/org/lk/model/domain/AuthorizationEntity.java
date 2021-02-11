@@ -18,6 +18,7 @@ import javax.persistence.Table;
 public class AuthorizationEntity {
 
     @Id
+    @Column(name = "user_id", unique = true)
     private Integer id;
     @Column(name = "login")
     private String login;

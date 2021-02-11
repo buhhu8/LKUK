@@ -3,7 +3,6 @@ package org.lk.service;
 import lombok.RequiredArgsConstructor;
 import org.lk.model.domain.AuthorizationEntity;
 import org.lk.model.domain.InfoEntity;
-import org.lk.model.dto.InfoAndAuthDto;
 import org.lk.repository.jpa.JpaUserAuthorizationRepository;
 import org.lk.repository.jpa.JpaUserInfoRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

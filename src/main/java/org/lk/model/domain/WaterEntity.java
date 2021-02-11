@@ -20,6 +20,9 @@ import java.time.LocalDate;
 public class WaterEntity {
 
     @Id
+    @Column(name = "user_id")
+    private Integer user_id;
+    @Column(name = "id")
     private Integer id;
     @Column(name = "hot")
     private String hot;
