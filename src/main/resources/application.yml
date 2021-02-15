@@ -15,6 +15,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-
+    show_sql: false
+    properties:
+      hibernate:
+        format_sql: false
 #migration:
 #  version: 17.01.2021.1

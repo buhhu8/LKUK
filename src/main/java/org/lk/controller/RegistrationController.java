@@ -1,7 +1,8 @@
 package org.lk.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.lk.model.dto.InfoAndAuthDto;
+import org.lk.model.dto.RegistrationDto;
+import org.lk.model.dto.InfoDto;
 import org.lk.service.RegistrationService;
 import org.lk.service.SessionService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +19,21 @@ public class RegistrationController {
     private final SessionService sessionService;
 
     @PostMapping("/registration")
-    public void newUser(@RequestBody InfoAndAuthDto infoAndAuthDto){
+    public void newUser(@RequestBody RegistrationDto registrationDto){
 
-        registrationService.saveInfo(infoAndAuthDto.getFirstName(),infoAndAuthDto.getLastName(),
-                                         infoAndAuthDto.getMiddleName(), infoAndAuthDto.getFlat());
+        // registrationService.register(dto)
+        // if success -> 200
+        // if fail - > 400
+        // TODO: authorization controller
 
-        registrationService.saveAuthInfo(infoAndAuthDto.getId(), infoAndAuthDto.getLogin(), infoAndAuthDto.getPassword());
+        // RegistrationDto.builder()
+        //        .login("")
+        //        .build();
 
-        sessionService.saveSessionId(infoAndAuthDto.getId());
+        InfoDto infoDto = registrationService.saveInfo(registrationDto);
+
+        registrationService.saveAuthInfo(infoDto.getUserId(), registrationDto.getLogin(), registrationDto.getPassword());
+
     }
 
 }

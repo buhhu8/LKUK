@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -19,9 +16,11 @@ import java.time.LocalDate;
 @Data
 public class WaterEntity {
 
+    //@Id
+    //@Column(name = "user_id")
+    //private Integer userId;
     @Id
-    @Column(name = "user_id")
-    private Integer user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "hot")
@@ -31,5 +30,8 @@ public class WaterEntity {
     @Column(name = "datewater")
     private LocalDate dateWater;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private InfoEntity userInfo;
 
 }

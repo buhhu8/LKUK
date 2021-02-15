@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class AuthorizationDto {
 
-    private Integer id;
+    private Integer userId;
     private String login;
     private String password;
 

@@ -19,7 +19,7 @@ public class AuthorizationController {
 
     private SessionService sessionService;
 
-    public AuthorizationController(AuthorizationService authorizationService, @Qualifier("innerCacheSessionService") SessionService sessionService) {
+    public AuthorizationController(AuthorizationService authorizationService,  SessionService sessionService) {
         this.authorizationService = authorizationService;
         this.sessionService = sessionService;
     }
@@ -33,9 +33,10 @@ public class AuthorizationController {
             return ResponseEntity.status(401).build(); // 401 Unauthorized
         }
 
-        sessionService.saveSessionId(authorizationService.returnId(request.getLogin()));
+        String sessionId = sessionService.saveSessionId(authorizationService.returnId(request.getLogin()));
+        System.out.println("SessionId:  " + sessionId);
         return ResponseEntity.ok()
-//                .header("SESSION-ID", sessionId)
+                .header("SESSION-ID", sessionId)
                 .build(); // 200 with empty body
     }
 

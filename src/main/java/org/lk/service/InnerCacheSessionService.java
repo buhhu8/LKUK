@@ -24,7 +24,7 @@ public class InnerCacheSessionService extends SessionService {
     }
 
     @Override
-    public void saveSessionId(Integer id) {
+    public String saveSessionId(Integer id) {
         System.out.println("Put session with user ID " + id + " to queue to save it later");
         queue.add(id);
 
@@ -42,6 +42,7 @@ public class InnerCacheSessionService extends SessionService {
                 super.saveSessionId(sessionId);
             }
         });
+        return "";
     }
 
     class SaveSessionThread extends Thread {

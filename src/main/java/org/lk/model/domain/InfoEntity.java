@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -18,7 +20,8 @@ public class InfoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "user_id")
+    private Integer InfoUserId;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -27,5 +30,15 @@ public class InfoEntity {
     private String middleName;
     @Column(name = "flat")
     private String flat;
+
+    public InfoEntity(String firstName, String lastName, String middleName, String flat) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.flat = flat;
+    }
+
+    @OneToMany (mappedBy = "userInfo")
+    private Set<WaterEntity> waterEntity;
 
 }

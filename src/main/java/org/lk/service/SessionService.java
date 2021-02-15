@@ -18,14 +18,14 @@ public class SessionService {
     private final Converter<AuthorizationSessionEntity, SessionDto> converter;
     private final JpaSessionRepository jpaSessionRepository;
 
-    public void saveSessionId(Integer id) {
+    public String saveSessionId(Integer id) {
         SessionDto dto = new SessionDto();
-
+        String sessionId = generateSessionId();
         dto.setUserId(id);
-        dto.setSessionId(generateSessionId());
+        dto.setSessionId(sessionId);
         dto.setAuthorizationExpiredDate(LocalDate.now().plusDays(1));
-
         jpaSessionRepository.save(converter.toEntity(dto));
+        return sessionId;
     }
 
     public String generateSessionId() {

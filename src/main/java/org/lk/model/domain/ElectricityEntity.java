@@ -21,7 +21,7 @@ public class ElectricityEntity {
 
     @Id
     @Column(name = "user_id")
-    private Integer user_id;
+    private Integer userId;
     private Integer id;
     private String dayElectricity;
     private String nightElectricity;

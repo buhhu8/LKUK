@@ -20,7 +20,7 @@ public class InfoController {
     @PostMapping("/userinfo")
     public Greeting findUser(@RequestBody InfoDto request) {
 
-        InfoDto user = infoConverter.toDto(infoService.findUserById(request.getId()));
+        InfoDto user = infoConverter.toDto(infoService.findUserById(request.getUserId()));
         infoService.addSomeInfo(user, "Тут живет хороший человек");
         Greeting obj = new Greeting();
         obj.setPairs(user.toString());

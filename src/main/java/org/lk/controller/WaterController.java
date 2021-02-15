@@ -18,9 +18,14 @@ public class WaterController {
     @PostMapping("/waterinfo")
     public Greeting showWaterInfoById(@RequestBody WaterDto waterDto) {
         Greeting greeting = new Greeting();
-        WaterDto infoWater = waterService.finById(waterDto.getId());
-        greeting.setPairs("Id: " + infoWater.getId() + " Hot:" + infoWater.getHot() + " Cold:" + infoWater.getCold() + " Date:" + infoWater.getDateWater());
+        WaterDto infoWater = waterService.finById(waterDto.getUserId());
+        greeting.setPairs("user Id: " + infoWater.getUserId() + " Hot:" + infoWater.getHot() + " Cold:" + infoWater.getCold() + " Date:" + infoWater.getDateWater());
         return greeting;
+    }
+
+    @PostMapping("/waterinsert")
+    public void insertIntoWater(@RequestBody WaterDto waterDto) {
+        waterService.insertWater(waterDto.getUserId(),waterDto.getHot(), waterDto.getCold(), waterDto.getDateWater());
     }
 
 }

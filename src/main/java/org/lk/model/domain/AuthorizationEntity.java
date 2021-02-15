@@ -19,11 +19,13 @@ public class AuthorizationEntity {
 
     @Id
     @Column(name = "user_id", unique = true)
-    private Integer id;
+    private Integer userId;
     @Column(name = "login")
     private String login;
     @Column(name = "password")
     private String password;
+
+
 
 }
 

@@ -25,13 +25,13 @@ public class AuthorizationControllerStressfulTest {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         for (int i = 0; i < 40; i++) {
             AuthorizationDto dto = new AuthorizationDto();
-            dto.setId(i);
+            dto.setUserId(i);
             dto.setLogin("admin");
             dto.setPassword("admin");
 
             executorService.submit(() -> {
 
-                System.out.println("Send request to authorization " + dto.getId());
+                System.out.println("Send request to authorization " + dto.getUserId());
                 restTemplate.postForEntity("http://localhost:5696/api/v1/authorization/session/auth", dto, Object.class);
             });
         }
