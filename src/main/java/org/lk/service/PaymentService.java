@@ -17,16 +17,14 @@ public class PaymentService {
 
 
 
-    public void insertIntoPayment(String debt){
+    public void insertIntoPayment(Integer userId, String debt){
 
         PaymentDto paymentDto = PaymentDto.builder()
                 .paymentDate()
                 .debt(debt)
-                .userId(3)
-                .id(1)
+                .paymentInfo(userInfoRepository.getOne(userId))
                 .build();
-        //paymentRepository.save(converter.toEntity(paymentDto));
-        System.out.println(converter.toEntity(paymentDto));
+        paymentRepository.save(converter.toEntity(paymentDto));
 
     }
 

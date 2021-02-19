@@ -39,6 +39,9 @@ public class InfoEntity {
     }
 
     @OneToMany (mappedBy = "userInfo")
-    private Set<WaterEntity> waterEntity;
+    private Set<WaterEntity> waterEntities;
+
+    @OneToMany(mappedBy = "paymentInfo")
+    private Set<PaymentEntity> paymentEntities;
 
 }

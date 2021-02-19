@@ -2,6 +2,7 @@ package org.lk.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.lk.model.domain.InfoEntity;
 
 import java.time.LocalDate;
 
@@ -10,10 +11,9 @@ public class PaymentDto {
 
     private PaymentDto(){ }
 
-    private Integer userId;
-    private Integer id;
     private String debt;
     private LocalDate paymentDate;
+    private InfoEntity paymentInfo;
 
     public static PaymentBuilder builder() {
         return new PaymentDto().new PaymentBuilder();
@@ -21,14 +21,10 @@ public class PaymentDto {
 
     public class PaymentBuilder {
 
-        public PaymentBuilder userId(Integer userId){
-            PaymentDto.this.userId = userId;
+        public PaymentBuilder paymentInfo(InfoEntity paymentInfo){
+            PaymentDto.this.paymentInfo = paymentInfo;
             return this;
-        }
-        // setter
-        public PaymentBuilder id(Integer id) {
-            PaymentDto.this.id = id;
-            return this; // return the same object of builder
+
         }
         public PaymentBuilder debt(String debt){
             PaymentDto.this.debt=debt;
