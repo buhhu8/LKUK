@@ -1,12 +1,12 @@
 package org.lk.model.dto;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.*;
 
-@Setter
-@Getter
-@Data
+@Value
+@Builder
+@JsonDeserialize(builder = InfoDto.InfoDtoBuilder.class)
 public class InfoDto {
 
     private Integer userId;
@@ -15,5 +15,8 @@ public class InfoDto {
     private String middleName;
     private String flat;
     private String someInfo;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class InfoDtoBuilder{}
 
 }

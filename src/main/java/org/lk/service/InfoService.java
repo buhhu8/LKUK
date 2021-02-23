@@ -26,16 +26,19 @@ public class InfoService {
     }
 
     public void addSomeInfo(InfoDto infoDto, String someInfo) {
-        infoDto.setSomeInfo(someInfo);
+        infoDto.builder()
+            .someInfo(someInfo)
+            .build();
 
     }
 
     public InfoDto insertData(String firstName, String lastName, String middleName, String flat) {
-        InfoDto dto = new InfoDto();
-        dto.setFirstName(firstName);
-        dto.setLastName(lastName);
-        dto.setMiddleName(middleName);
-        dto.setFlat(flat);
+        InfoDto dto = InfoDto.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .middleName(middleName)
+                .flat(flat)
+                .build();
         return dto;
     }
 

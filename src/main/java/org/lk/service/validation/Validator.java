@@ -12,8 +12,9 @@ public interface Validator<T> {
 
     default void requireNotBlank(String value) {
         if (value == null || value.trim().isEmpty()) {
-            throw new ValidationException("Строка не может быть пустой");
+           throw new ValidationException("Строка не может быть пустой");
         }
+
     }
 
 }

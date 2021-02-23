@@ -12,6 +12,7 @@ public class PaymentDto {
     private PaymentDto(){ }
 
     private String debt;
+    private Integer userId;
     private LocalDate paymentDate;
     private InfoEntity paymentInfo;
 

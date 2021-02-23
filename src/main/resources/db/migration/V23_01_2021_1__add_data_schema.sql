@@ -8,21 +8,22 @@ drop table if exists userinfo cascade;
 drop table if exists water cascade;
 
 create table if not exists authorization_session (
-                                       user_id int primary key,
+                                        id serial primary key,
+                                       user_id int unique,
                                        session_id varchar not null,
                                        expired_date date
 );
 
 create table if not exists electricity (
-                             user_id int primary key,
-                             id serial,
+                             user_id int,
+                             id serial primary key,
                              dayElectricity varchar,
                              nightElectricity varchar,
                              electricityDate date
 );
 
 create table if not exists payment (
-                         user_id int,
+                         user_id int unique,
                          id  serial primary key,
                          debt varchar,
                          paymentDate date
@@ -37,7 +38,7 @@ create table if not exists userinfo (
 );
 
 create table if not exists water (
-                       user_id int ,
+                       user_id int unique,
                        id serial primary key,
                        hot varchar,
                        cold varchar,
@@ -45,7 +46,8 @@ create table if not exists water (
 );
 
 create table if not exists user_authorization (
-                                       user_id int primary key,
+                                       id serial primary key,
+                                       user_id int unique,
                                        login varchar not null unique,
                                        password varchar not null
 

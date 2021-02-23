@@ -23,7 +23,7 @@ public class AuthorizationService {
     }
 
     public Integer returnId(String login) {
-        return jpaUserAuthorizationRepository.findByLogin(login).get().getUserId();
+        return jpaUserAuthorizationRepository.findByLogin(login).get().getAuthInfo().getInfoUserId();
     }
 
 

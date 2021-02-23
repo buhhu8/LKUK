@@ -24,10 +24,11 @@ public class AuthorizationControllerStressfulTest {
         // POST http://localhost:5696/api/v1/authorization/session/auth
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         for (int i = 0; i < 40; i++) {
-            AuthorizationDto dto = new AuthorizationDto();
-            dto.setUserId(i);
-            dto.setLogin("admin");
-            dto.setPassword("admin");
+            AuthorizationDto dto = AuthorizationDto.builder()
+                .userId(i)
+                    .login("admin")
+                    .password("admin")
+                    .build();
 
             executorService.submit(() -> {
 

@@ -21,8 +21,8 @@ public class RegistrationDto {
     String middleName;
     String flat;
     String someInfo;
-    String sessionId;
-    LocalDate authorizationExpiredDate;
+
+
 
     @JsonPOJOBuilder(withPrefix = "")
     // withLogin()          -> login();

@@ -44,4 +44,7 @@ public class InfoEntity {
     @OneToMany(mappedBy = "paymentInfo")
     private Set<PaymentEntity> paymentEntities;
 
+    @OneToOne (fetch = FetchType.LAZY,mappedBy = "authInfo")
+    private AuthorizationEntity infoAuth;
+
 }

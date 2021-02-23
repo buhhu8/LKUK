@@ -37,6 +37,7 @@ public class AuthorizationController {
         System.out.println("SessionId:  " + sessionId);
         return ResponseEntity.ok()
                 .header("SESSION-ID", sessionId)
+                .header("USER-ID",String.valueOf(authorizationService.returnId(request.getLogin())))
                 .build(); // 200 with empty body
     }
 

@@ -29,7 +29,7 @@ public class PaymentController {
 //                .paymentDate()
 //                .id(1)
 //                .build();
-        paymentService.insertIntoPayment(dto.getPaymentInfo().getInfoUserId(),dto.getDebt());
+        paymentService.insertIntoPayment(dto.getUserId(),dto.getDebt());
 
 
     }

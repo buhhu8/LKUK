@@ -1,29 +1,33 @@
 package org.lk.model.domain;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 @Entity
+@RequiredArgsConstructor
+@Data
 @ToString
 @Table(name = "user_authorization")
 
 public class AuthorizationEntity {
 
     @Id
-    @Column(name = "user_id", unique = true)
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
     @Column(name = "login")
     private String login;
     @Column(name = "password")
     private String password;
+
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private InfoEntity authInfo;
+
+
 
 
 
