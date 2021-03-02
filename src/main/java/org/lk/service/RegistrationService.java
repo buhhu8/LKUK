@@ -14,6 +14,8 @@ import org.lk.service.validation.RegistrationValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @RequiredArgsConstructor
 public class RegistrationService {
@@ -26,14 +28,11 @@ public class RegistrationService {
     private final RegistrationValidator registrationValidator;
 
 
-    public boolean register(RegistrationDto registrationDto) {
-        try {
+    public void register(RegistrationDto registrationDto) {
+
             registrationValidator.validate(registrationDto);
             saveAuthInfo(registrationDto);
-            return true;
-        } catch (ValidationException exc) {
-            return false;
-        }
+
 
     }
 
