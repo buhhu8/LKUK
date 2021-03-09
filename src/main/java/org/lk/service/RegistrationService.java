@@ -29,11 +29,8 @@ public class RegistrationService {
 
 
     public void register(RegistrationDto registrationDto) {
-
-            registrationValidator.validate(registrationDto);
-            saveAuthInfo(registrationDto);
-
-
+        registrationValidator.validate(registrationDto);
+        saveAuthInfo(registrationDto);
     }
 
     public void saveAuthInfo(RegistrationDto registrationDto) {
@@ -54,9 +51,6 @@ public class RegistrationService {
                 .build();
 
         jpaUserAuthorizationRepository.save(authorizationConverter.toEntity(authorizationDto));
-
-
     }
-
 
 }

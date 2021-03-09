@@ -8,16 +8,12 @@ import org.springframework.validation.Errors;
 
 public interface Validator<T> {
 
-
     void validate(T obj);
 
-    default void requireNotBlank(String value) {
-
+    default void requireNotBlank(String field, String value) {
         if (value == null || value.trim().isEmpty()) {
-
-            throw new ValidationException("String must be non empty");
+            throw new ValidationException(field, "String must be non empty");
         }
-
     }
 
 }

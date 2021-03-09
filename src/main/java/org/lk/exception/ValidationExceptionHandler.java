@@ -15,15 +15,19 @@ import java.sql.Timestamp;
 @ControllerAdvice
 public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
 
-
     @ExceptionHandler(ValidationException.class)
     protected ResponseEntity<AwesomeException> handleValidationException(ValidationException ex) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        String fileName = Exception.class.getName();
+        String fileName = ex.getField();
         String exception = ex.getMessage();
-        
 
-        return new ResponseEntity<>(new AwesomeException(timestamp.getTime(), HttpStatus.BAD_REQUEST.toString(), exception, fileName, ex.toString()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new AwesomeException(
+                timestamp.getTime(),
+                HttpStatus.BAD_REQUEST.toString(),
+                exception,
+                fileName,
+                ex.toString()
+        ), HttpStatus.BAD_REQUEST);
     }
 
     @Data
@@ -34,8 +38,6 @@ public class ValidationExceptionHandler extends ResponseEntityExceptionHandler {
         private String message;
         private String fileName;
         private String exceptionMessage;
-
     }
-
 
 }

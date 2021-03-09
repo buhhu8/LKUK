@@ -8,13 +8,10 @@ import org.springframework.validation.Errors;
 @Component
 public class RegistrationValidator implements Validator<RegistrationDto> {
 
-
-
     @Override
     public void validate(RegistrationDto obj) {
-
-        requireNotBlank(obj.getFirstName());
-        requireNotBlank(obj.getLastName());
+        requireNotBlank("firstName", obj.getFirstName());
+        requireNotBlank("lastName", obj.getLastName());
     }
 
 }

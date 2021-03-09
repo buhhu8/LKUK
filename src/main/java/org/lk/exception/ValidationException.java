@@ -1,11 +1,15 @@
 package org.lk.exception;
 
+import lombok.Getter;
+
+@Getter
 public class ValidationException extends RuntimeException {
 
-    public ValidationException(String message) {
+    private final String field;
+
+    public ValidationException(String field, String message) {
         super(message);
-
+        this.field = field;
     }
-
 
 }

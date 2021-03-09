@@ -15,17 +15,13 @@ public class PaymentService {
     private final JpaUserInfoRepository userInfoRepository;
     private final PaymentConverter converter;
 
-
-
-    public void insertIntoPayment(Integer userId, String debt){
-
+    public void insertIntoPayment(Integer userId, String debt) {
         PaymentDto paymentDto = PaymentDto.builder()
                 .paymentDate()
                 .debt(debt)
-                .paymentInfo(userInfoRepository.getOne(userId))
+                .paymentInfo(userInfoRepository.getOne(userId)) // TODO
                 .build();
         paymentRepository.save(converter.toEntity(paymentDto));
-
     }
 
 }

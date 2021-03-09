@@ -8,30 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@AllArgsConstructor
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/v1/user/")
 public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/insertpay")
+    @PostMapping("/insertpay") // TODO
     public void insertIntoPayment(@RequestBody PaymentDto dto) {
-        // PaymentDto dto = new PaymentDto();
-        // new PaymentDto.PaymentDtoBuilder(); // object of nested class
-        // new PaymentDto().new PaymentDtoBuilder(); // object of inner class
-       // PaymentDto.builder()
-
-
-//        PaymentDto.builder()
-//                .userId(1)
-//                .debt("sad")
-//                .paymentDate()
-//                .id(1)
-//                .build();
         paymentService.insertIntoPayment(dto.getUserId(),dto.getDebt());
-
-
     }
 
 }
