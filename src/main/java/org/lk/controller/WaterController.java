@@ -1,31 +1,30 @@
 package org.lk.controller;
 
 import lombok.AllArgsConstructor;
+import org.lk.model.domain.WaterEntity;
 import org.lk.model.dto.WaterDto;
 import org.lk.service.WaterService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/session")
+@RequestMapping("/api/v1/users")
 public class WaterController {
 
     WaterService waterService;
 
-    @PostMapping("/waterinfo")
-    public Greeting showWaterInfoById(@RequestBody WaterDto waterDto) {
-        Greeting greeting = new Greeting();
-        WaterDto infoWater = waterService.finById(waterDto.getUserId());
-        greeting.setPairs("user Id: " + infoWater.getUserId() + " Hot:" + infoWater.getHot() + " Cold:" + infoWater.getCold() + " Date:" + infoWater.getDateWater());
-        return greeting;
+    @GetMapping("/{userId}/waters")
+    public String showWaterInfoById(@PathVariable Integer userId) {
+        return waterService.findAllWaterById(userId);
     }
 
-    @PostMapping("/waterinsert")
-    public void insertIntoWater(@RequestBody WaterDto waterDto) {
-        waterService.insertWater(waterDto.getUserId(),waterDto.getHot(), waterDto.getCold(), waterDto.getDateWater());
+    @PostMapping("/{userId}/insert_water")
+    public void insertIntoWater(@RequestBody WaterDto waterDto, @PathVariable Integer userId) {
+        waterService.insertWater(userId,waterDto.getHot(), waterDto.getCold());
     }
 
 }

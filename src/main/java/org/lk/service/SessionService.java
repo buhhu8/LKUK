@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.lk.model.domain.AuthorizationSessionEntity;
 import org.lk.model.dto.SessionDto;
 import org.lk.repository.jpa.JpaSessionRepository;
-import org.lk.service.converter.Converter;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,8 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class SessionService {
 
-    // @Qualifier("sessionConverter")
-    private final Converter<AuthorizationSessionEntity, SessionDto> converter;
+    private final ModelMapper modelMapper;
     private final JpaSessionRepository jpaSessionRepository;
 
     public String saveSessionId(Integer id) {
@@ -24,7 +23,7 @@ public class SessionService {
         dto.setUserId(id);
         dto.setSessionId(sessionId);
         dto.setAuthorizationExpiredDate(LocalDate.now().plusDays(1));
-        jpaSessionRepository.save(converter.toEntity(dto));
+        jpaSessionRepository.save(modelMapper.map(dto, AuthorizationSessionEntity.class));
         return sessionId;
     }
 

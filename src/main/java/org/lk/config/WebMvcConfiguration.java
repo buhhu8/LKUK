@@ -23,7 +23,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns("/api/v1/authorization/**");
         registry.addInterceptor(sessionCreateInterceptor)
                 .addPathPatterns("/api/v1/authorization/**");
-        //api/v1/authorization
+
     }
 
 }

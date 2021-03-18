@@ -1,5 +1,6 @@
 package org.lk.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,13 +39,13 @@ public class InfoEntity {
         this.flat = flat;
     }
 
-    @OneToMany (mappedBy = "userInfo")
+    @OneToMany (mappedBy = "userInfo", fetch = FetchType.LAZY)
     private Set<WaterEntity> waterEntities;
 
-    @OneToMany(mappedBy = "paymentInfo")
-    private Set<PaymentEntity> paymentEntities;
-
-    @OneToOne (fetch = FetchType.LAZY,mappedBy = "authInfo")
-    private AuthorizationEntity infoAuth;
+//    @OneToMany(mappedBy = "paymentInfo")
+//    private Set<PaymentEntity> paymentEntities;
+//
+//    @OneToOne (fetch = FetchType.LAZY,mappedBy = "authInfo")
+//    private AuthorizationEntity infoAuth;
 
 }

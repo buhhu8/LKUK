@@ -1,25 +1,26 @@
 package org.lk.service;
 
-import lombok.AllArgsConstructor;
-import org.lk.model.domain.AuthorizationEntity;
+import lombok.RequiredArgsConstructor;
+import org.lk.model.dto.AuthorizationDto;
 import org.lk.repository.jpa.JpaUserAuthorizationRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthorizationService {
 
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
-    private JpaUserAuthorizationRepository jpaUserAuthorizationRepository;
+    private final JpaUserAuthorizationRepository jpaUserAuthorizationRepository;
 
     public Boolean checkAuthorization(String login, String password) {
-        Optional<AuthorizationEntity> optional = jpaUserAuthorizationRepository.findByLogin(login);
-        return optional.get().getLogin().equals(login) && passwordEncoder.matches(password, optional.get().getPassword());
+        AuthorizationDto authorizationDto = jpaUserAuthorizationRepository.findByLogin(login)
+                .map(entity -> modelMapper.map(entity, AuthorizationDto.class))
+                .orElseThrow(() -> new RuntimeException("User not found with login " + login));
+        return authorizationDto.getLogin().equals(login)
+                && passwordEncoder.matches(password, authorizationDto.getPassword());
     }
 
     public Integer returnId(String login) {

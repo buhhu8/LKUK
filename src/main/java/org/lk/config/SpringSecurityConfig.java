@@ -13,7 +13,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         PasswordEncoder pe = new BCryptPasswordEncoder();
-        System.out.println(pe.encode("admin"));
         return pe;
     }
 

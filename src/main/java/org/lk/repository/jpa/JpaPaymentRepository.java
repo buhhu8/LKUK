@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface JpaPaymentRepository extends CrudRepository<PaymentEntity, Integer> {
+public interface JpaPaymentRepository
+        extends CrudRepository<PaymentEntity, Integer> {
 
-    public Optional<PaymentEntity> findById(Integer id);
+    Optional<PaymentEntity> findById(Integer id);
 
 
 }

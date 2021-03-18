@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/user/")
+@RequestMapping("/api/v1/payment/")
 public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/insertpay") // TODO
+    @PostMapping("/insert") // TODO
     public void insertIntoPayment(@RequestBody PaymentDto dto) {
         paymentService.insertIntoPayment(dto.getUserId(),dto.getDebt());
     }

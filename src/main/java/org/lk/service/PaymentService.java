@@ -1,10 +1,11 @@
 package org.lk.service;
 
 import lombok.RequiredArgsConstructor;
+import org.lk.model.domain.PaymentEntity;
 import org.lk.model.dto.PaymentDto;
 import org.lk.repository.jpa.JpaPaymentRepository;
 import org.lk.repository.jpa.JpaUserInfoRepository;
-import org.lk.service.converter.PaymentConverter;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +14,7 @@ public class PaymentService {
 
     private final JpaPaymentRepository paymentRepository;
     private final JpaUserInfoRepository userInfoRepository;
-    private final PaymentConverter converter;
+    private final ModelMapper modelMapper;
 
     public void insertIntoPayment(Integer userId, String debt) {
         PaymentDto paymentDto = PaymentDto.builder()
@@ -21,7 +22,7 @@ public class PaymentService {
                 .debt(debt)
                 .paymentInfo(userInfoRepository.getOne(userId)) // TODO
                 .build();
-        paymentRepository.save(converter.toEntity(paymentDto));
+        paymentRepository.save(modelMapper.map(paymentDto, PaymentEntity.class));
     }
 
 }

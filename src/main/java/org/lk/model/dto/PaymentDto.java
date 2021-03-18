@@ -1,15 +1,15 @@
 package org.lk.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import org.lk.model.domain.InfoEntity;
 
 import java.time.LocalDate;
 
-@Getter
+@Data
 public class PaymentDto {
 
-    private PaymentDto(){ }
+    private PaymentDto() {
+    }
 
     private String debt;
     private Integer userId;
@@ -22,16 +22,18 @@ public class PaymentDto {
 
     public class PaymentBuilder {
 
-        public PaymentBuilder paymentInfo(InfoEntity paymentInfo){
+        public PaymentBuilder paymentInfo(InfoEntity paymentInfo) {
             PaymentDto.this.paymentInfo = paymentInfo;
             return this;
 
         }
-        public PaymentBuilder debt(String debt){
-            PaymentDto.this.debt=debt;
+
+        public PaymentBuilder debt(String debt) {
+            PaymentDto.this.debt = debt;
             return this;
         }
-        public PaymentBuilder paymentDate(){
+
+        public PaymentBuilder paymentDate() {
             PaymentDto.this.paymentDate = LocalDate.now();
             return this;
         }

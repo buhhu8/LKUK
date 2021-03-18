@@ -12,8 +12,6 @@ import java.time.LocalDate;
 @JsonDeserialize(builder = RegistrationDto.RegistrationDtoBuilder.class)
 public class RegistrationDto {
 
-    // TCP - telescoping constructor parameters - use Builder pattern
-    // private final
     String login;
     String password;
     String firstName;
@@ -21,8 +19,6 @@ public class RegistrationDto {
     String middleName;
     String flat;
     String someInfo;
-
-
 
     @JsonPOJOBuilder(withPrefix = "")
     // withLogin()          -> login();

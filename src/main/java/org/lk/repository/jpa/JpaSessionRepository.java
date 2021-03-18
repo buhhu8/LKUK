@@ -9,7 +9,8 @@ import java.util.Optional;
 
 
 @Repository
-public interface JpaSessionRepository extends CrudRepository<AuthorizationSessionEntity, Integer> {
+public interface JpaSessionRepository
+        extends CrudRepository<AuthorizationSessionEntity, Integer> {
 
     Optional<AuthorizationSessionEntity> findBySessionId(String sessionId);
 
