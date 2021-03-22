@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +16,10 @@ public interface JpaWaterRepository
         extends JpaRepository<WaterEntity, Integer> {
 
     @Query(
-            value = "select * from water where user_id = :userId",
+            value = "select * from water where user_id = :userId AND datewater = :date",
             nativeQuery = true
     )
-    Optional<WaterEntity> findByUserId(@Param("userId") Integer userId);
+    Optional<WaterEntity> findByUserIdAndDateWater(@Param("userId") Integer userId, @Param("date") Date date);
     List<WaterEntity> findAll();
 
 }

@@ -1,20 +1,21 @@
 package org.lk.model.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.lk.model.domain.InfoEntity;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 public class PaymentDto {
-
-    private PaymentDto() {
-    }
 
     private String debt;
     private Integer userId;
     private LocalDate paymentDate;
     private InfoEntity paymentInfo;
+    private PaymentDto() {
+    }
 
     public static PaymentBuilder builder() {
         return new PaymentDto().new PaymentBuilder();
@@ -33,8 +34,8 @@ public class PaymentDto {
             return this;
         }
 
-        public PaymentBuilder paymentDate() {
-            PaymentDto.this.paymentDate = LocalDate.now();
+        public PaymentBuilder paymentDate(LocalDate date) {
+            PaymentDto.this.paymentDate = date;
             return this;
         }
 

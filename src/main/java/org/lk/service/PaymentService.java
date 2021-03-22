@@ -8,21 +8,34 @@ import org.lk.repository.jpa.JpaUserInfoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
 
-    private final JpaPaymentRepository paymentRepository;
-    private final JpaUserInfoRepository userInfoRepository;
+    private final JpaPaymentRepository jpaPaymentRepositorytRepository;
+    private final JpaUserInfoRepository jpaUserInfoRepository;
     private final ModelMapper modelMapper;
 
     public void insertIntoPayment(Integer userId, String debt) {
         PaymentDto paymentDto = PaymentDto.builder()
-                .paymentDate()
+                .paymentDate(LocalDate.now())
                 .debt(debt)
-                .paymentInfo(userInfoRepository.getOne(userId)) // TODO
+                .paymentInfo(jpaUserInfoRepository.getOne(userId)) // TODO
                 .build();
-        paymentRepository.save(modelMapper.map(paymentDto, PaymentEntity.class));
+        jpaPaymentRepositorytRepository.save(modelMapper.map(paymentDto, PaymentEntity.class));
+    }
+
+    public List<PaymentDto> showAllPaymentByUserId(Integer userId){
+        List<PaymentEntity> list =  jpaPaymentRepositorytRepository.findAllByUserId(userId);
+        List<PaymentDto> list1 = new ArrayList<>();
+        for (PaymentEntity entity : list){
+            list1.add(modelMapper.map(entity,PaymentDto.class));
+        }
+        return list1;
     }
 
 }

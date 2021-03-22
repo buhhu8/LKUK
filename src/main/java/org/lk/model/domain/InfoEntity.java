@@ -1,10 +1,7 @@
 package org.lk.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,8 +10,8 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Data
+@Getter
+@Setter
 @Table(name = "userinfo")
 
 public class InfoEntity {
@@ -42,10 +39,10 @@ public class InfoEntity {
     @OneToMany (mappedBy = "userInfo", fetch = FetchType.LAZY)
     private Set<WaterEntity> waterEntities;
 
-//    @OneToMany(mappedBy = "paymentInfo")
-//    private Set<PaymentEntity> paymentEntities;
-//
-//    @OneToOne (fetch = FetchType.LAZY,mappedBy = "authInfo")
-//    private AuthorizationEntity infoAuth;
+    @OneToMany(mappedBy = "paymentInfo", fetch = FetchType.LAZY)
+    private Set<PaymentEntity> paymentEntities;
+
+    @OneToOne (fetch = FetchType.LAZY,mappedBy = "authInfo")
+    private AuthorizationEntity infoAuth;
 
 }

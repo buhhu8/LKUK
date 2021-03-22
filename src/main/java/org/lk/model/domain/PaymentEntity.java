@@ -1,20 +1,16 @@
 package org.lk.model.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Data
+@RequiredArgsConstructor
+@Getter
+@Setter
 @Table(name = "payment")
 
 public class PaymentEntity {
@@ -26,7 +22,7 @@ public class PaymentEntity {
     private String debt;
     private LocalDate paymentDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private InfoEntity paymentInfo;
 }

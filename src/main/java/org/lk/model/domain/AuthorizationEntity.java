@@ -7,8 +7,8 @@ import javax.persistence.*;
 
 @Entity
 @RequiredArgsConstructor
-@Data
-@ToString
+@Getter
+@Setter
 @Table(name = "user_authorization")
 
 public class AuthorizationEntity {
