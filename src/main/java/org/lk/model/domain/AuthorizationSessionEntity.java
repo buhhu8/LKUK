@@ -9,8 +9,7 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Setter
 @Getter
 @Table(name = "authorization_session")

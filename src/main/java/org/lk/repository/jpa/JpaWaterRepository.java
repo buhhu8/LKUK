@@ -20,6 +20,10 @@ public interface JpaWaterRepository
             nativeQuery = true
     )
     Optional<WaterEntity> findByUserIdAndDateWater(@Param("userId") Integer userId, @Param("date") Date date);
-    List<WaterEntity> findAll();
+    @Query(
+            value = "select * from water where user_id = :userId",
+            nativeQuery = true
+    )
+    List<WaterEntity> findAllById(@Param("userId") Integer userId);
 
 }

@@ -3,6 +3,7 @@ package org.lk.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Column;
@@ -12,8 +13,7 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "electricity")
 
 public class ElectricityEntity {

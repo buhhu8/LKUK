@@ -26,7 +26,7 @@ public class WaterService {
     }
 
     public List<WaterDto> findAllWaterById(Integer userId) {
-        List<WaterEntity> list = jpaWaterRepository.findAll();
+        List<WaterEntity> list = jpaWaterRepository.findAllById(userId);
         List<WaterDto> list1 = new ArrayList<>();
         for(WaterEntity entity: list){
             list1.add(modelMapper.map(entity, WaterDto.class));

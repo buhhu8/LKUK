@@ -8,8 +8,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @Table(name = "userinfo")

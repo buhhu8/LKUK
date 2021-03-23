@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -36,6 +37,12 @@ public class PaymentService {
             list1.add(modelMapper.map(entity,PaymentDto.class));
         }
         return list1;
+    }
+
+    public PaymentDto showPaymentByUserIdAndDate(Integer userId, Date date){
+        return jpaPaymentRepositorytRepository.findByUserIdAndDate(userId,date)
+                .map(entity ->  modelMapper.map(entity, PaymentDto.class))
+                .orElseThrow(() -> new RuntimeException("Couldn't find records")) ;
     }
 
 }
