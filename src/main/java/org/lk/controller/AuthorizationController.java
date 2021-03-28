@@ -16,8 +16,9 @@ public class AuthorizationController {
     private final AuthorizationService authorizationService;
     private final SessionService sessionService;
 
+    // TODO: replace to POST and send login/password in the request body
     @GetMapping("/{login}/{password}")
-    public ResponseEntity<Object> authorizeUser(@PathVariable String login,@PathVariable String password) {
+    public ResponseEntity<Object> authorizeUser(@PathVariable String login, @PathVariable String password) {
         if (!authorizationService.checkAuthorization(login,password)) {
             return ResponseEntity.status(401).build(); // 401 Unauthorized
         }

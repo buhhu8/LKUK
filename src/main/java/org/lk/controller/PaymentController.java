@@ -16,8 +16,9 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/{userId}/insert") // TODO
-    public void insertIntoPayment(@RequestBody PaymentDto dto, @PathVariable Integer userId) {
+    @PostMapping("/{userId}")
+    public void insertIntoPayment(@PathVariable Integer userId,
+                                  @RequestBody PaymentDto dto) {
         paymentService.insertIntoPayment(userId,dto.getDebt());
     }
 

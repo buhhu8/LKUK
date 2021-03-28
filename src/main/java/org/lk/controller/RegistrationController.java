@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import org.lk.model.dto.RegistrationDto;
 import org.lk.service.RegistrationService;
 import org.lk.service.SessionService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,17 +20,12 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     private final RegistrationService registrationService;
-    private final SessionService sessionService;
 
     @SneakyThrows
-    @PostMapping("/registration") // TODO
-    public void newUser(@RequestBody @Valid RegistrationDto registrationDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
-        } else {
-            registrationService.register(registrationDto);
-        }
-
+    @PostMapping("/registration")
+    public ResponseEntity<Object> newUser(@RequestBody @Valid RegistrationDto registrationDto) {
+        registrationService.register(registrationDto);
+        return ResponseEntity.ok().build(); // returns 200 with empty body
     }
 
 }

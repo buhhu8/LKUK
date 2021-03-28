@@ -11,7 +11,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/project-lk-uk
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: 0280829Denis
+    password: root
   jpa:
     hibernate:
       ddl-auto: none

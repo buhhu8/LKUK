@@ -2,6 +2,7 @@ package org.lk.service;
 
 import lombok.RequiredArgsConstructor;
 import org.lk.model.domain.PaymentEntity;
+import org.lk.model.dto.InfoDto;
 import org.lk.model.dto.PaymentDto;
 import org.lk.repository.jpa.JpaPaymentRepository;
 import org.lk.repository.jpa.JpaUserInfoRepository;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,18 +27,16 @@ public class PaymentService {
         PaymentDto paymentDto = PaymentDto.builder()
                 .paymentDate(LocalDate.now())
                 .debt(debt)
-                .paymentInfo(jpaUserInfoRepository.getOne(userId)) // TODO
+                .paymentInfo(modelMapper.map(jpaUserInfoRepository.getOne(userId), InfoDto.class))
                 .build();
         jpaPaymentRepositorytRepository.save(modelMapper.map(paymentDto, PaymentEntity.class));
     }
 
     public List<PaymentDto> showAllPaymentByUserId(Integer userId){
         List<PaymentEntity> list =  jpaPaymentRepositorytRepository.findAllByUserId(userId);
-        List<PaymentDto> list1 = new ArrayList<>();
-        for (PaymentEntity entity : list){
-            list1.add(modelMapper.map(entity,PaymentDto.class));
-        }
-        return list1;
+        return list.stream()
+                .map(entity -> modelMapper.map(entity,PaymentDto.class))
+                .collect(Collectors.toList());
     }
 
     public PaymentDto showPaymentByUserIdAndDate(Integer userId, Date date){

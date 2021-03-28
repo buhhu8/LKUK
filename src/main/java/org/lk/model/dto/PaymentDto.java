@@ -13,7 +13,7 @@ public class PaymentDto {
     private String debt;
     private Integer userId;
     private LocalDate paymentDate;
-    private InfoEntity paymentInfo;
+    private InfoDto paymentInfo;
     private PaymentDto() {
     }
 
@@ -23,7 +23,7 @@ public class PaymentDto {
 
     public class PaymentBuilder {
 
-        public PaymentBuilder paymentInfo(InfoEntity paymentInfo) {
+        public PaymentBuilder paymentInfo(InfoDto paymentInfo) {
             PaymentDto.this.paymentInfo = paymentInfo;
             return this;
 

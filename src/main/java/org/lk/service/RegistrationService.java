@@ -1,6 +1,7 @@
 package org.lk.service;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
 import org.lk.model.domain.AuthorizationEntity;
 import org.lk.model.domain.InfoEntity;
 import org.lk.model.dto.AuthorizationDto;
