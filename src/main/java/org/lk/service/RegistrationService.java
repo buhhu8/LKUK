@@ -8,7 +8,6 @@ import org.lk.model.dto.InfoDto;
 import org.lk.model.dto.RegistrationDto;
 import org.lk.repository.jpa.JpaUserAuthorizationRepository;
 import org.lk.repository.jpa.JpaUserInfoRepository;
-import org.lk.service.validation.RegistrationValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,10 +20,8 @@ public class RegistrationService {
     private final JpaUserInfoRepository jpaUserInfoRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
-    private final RegistrationValidator registrationValidator;
 
     public void register(RegistrationDto registrationDto) {
-        registrationValidator.validate(registrationDto);
         saveAuthInfo(registrationDto);
     }
 
