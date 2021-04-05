@@ -20,7 +20,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sessionIdInterceptor)
                 .addPathPatterns("/api/**")
-                .excludePathPatterns("/api/v1/registration/**");
+                .excludePathPatterns("/api/v1/registration/**", "/api/v1/authorization");
+
         registry.addInterceptor(sessionCreateInterceptor)
                 .addPathPatterns("/api/v1/registration/**");
 

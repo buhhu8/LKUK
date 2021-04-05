@@ -9,7 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,7 +20,7 @@ public class WaterService {
     private final ModelMapper modelMapper;
     private final JpaUserInfoRepository userInfoRepository;
 
-    public WaterDto finWaterByDate(Integer userId, Date date) {
+    public WaterDto findWaterByDate(Integer userId, LocalDate date) {
         WaterEntity entity = jpaWaterRepository.findByUserIdAndDateWater(userId, date).get();
         return modelMapper.map(entity,WaterDto.class);
     }

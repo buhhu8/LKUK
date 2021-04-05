@@ -21,6 +21,7 @@ public class AuthorizationService {
                 .orElseThrow(() -> new RuntimeException("User not found with login " + login));
         return authorizationDto.getLogin().equals(login)
                 && passwordEncoder.matches(password, authorizationDto.getPassword());
+
     }
 
     public Integer returnId(String login) {

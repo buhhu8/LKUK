@@ -16,16 +16,15 @@ public class AuthorizationController {
     private final AuthorizationService authorizationService;
     private final SessionService sessionService;
 
-    // TODO: replace to POST and send login/password in the request body
-    @GetMapping("/{login}/{password}")
-    public ResponseEntity<Object> authorizeUser(@PathVariable String login, @PathVariable String password) {
-        if (!authorizationService.checkAuthorization(login,password)) {
+    @PostMapping
+    public ResponseEntity<Object> authorizeUser(@RequestBody AuthorizationDto dto) {
+        if (!authorizationService.checkAuthorization(dto.getLogin(),dto.getPassword())) {
             return ResponseEntity.status(401).build(); // 401 Unauthorized
         }
-        String sessionId = sessionService.saveSessionId(authorizationService.returnId(login));
+        String sessionId = sessionService.saveSessionId(authorizationService.returnId(dto.getLogin()));
         return ResponseEntity.ok()
                 .header("SESSION-ID", sessionId)
-                .header("USER-ID",String.valueOf(authorizationService.returnId(login)))
+                .header("USER-ID",String.valueOf(authorizationService.returnId(dto.getPassword())))
                 .build(); // 200 with empty body
     }
 

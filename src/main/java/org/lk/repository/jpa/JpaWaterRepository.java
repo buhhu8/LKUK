@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +20,7 @@ public interface JpaWaterRepository
             value = "select * from water where user_id = :userId AND datewater = :date",
             nativeQuery = true
     )
-    Optional<WaterEntity> findByUserIdAndDateWater(@Param("userId") Integer userId, @Param("date") Date date);
+    Optional<WaterEntity> findByUserIdAndDateWater(@Param("userId") Integer userId, @Param("date") LocalDate date);
     @Query(
             value = "select * from water where user_id = :userId",
             nativeQuery = true

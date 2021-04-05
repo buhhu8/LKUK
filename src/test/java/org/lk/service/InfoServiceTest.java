@@ -80,11 +80,27 @@ public class InfoServiceTest {
         verify(jpaUserInfoRepository).save(entity);
     }
 
+    @Test
+    public void testFindUserByFlat_flatExists_returnMappedDto(){
+        //given
+        InfoDto expectedResult = createInfoDto(1);
+        InfoEntity entity = createInfoEntity(1);
+        when(jpaUserInfoRepository.findByFlat("234"))
+                .thenReturn(Optional.of(entity));
+        when(modelMapper.map(entity,InfoDto.class))
+                .thenReturn(expectedResult);
+
+        //when
+        InfoDto result = infoService.findUserByFlat("234");
+        //then
+        assertEquals(expectedResult,result);
+    }
+
     private InfoEntity createInfoEntity(Integer userId) {
         InfoEntity entity = new InfoEntity();
         entity.setInfoUserId(userId);
         entity.setFirstName("user_name");
-
+        entity.setFlat("234");
         return entity;
     }
 
@@ -92,8 +108,8 @@ public class InfoServiceTest {
         InfoDto dto = new InfoDto();
         dto.setUserId(userId);
         dto.setFirstName("user_name");
+        dto.setFlat("234");
 
         return dto;
     }
-
 }
