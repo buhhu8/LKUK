@@ -5,12 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 import org.lk.model.domain.InfoEntity;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
 public class AuthorizationDto {
 
     private Integer userId;
+    @NotEmpty(message = "Login can't be empty")
     private String login;
+    @NotEmpty(message = "Password can't be empty")
     private String password;
     private InfoEntity authInfo;
 

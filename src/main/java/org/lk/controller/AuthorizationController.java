@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/authorization")
@@ -18,7 +20,7 @@ public class AuthorizationController {
     private final SessionService sessionService;
 
     @PostMapping
-    public ResponseEntity<Object> authorizeUser(@RequestBody AuthorizationDto dto) {
+    public ResponseEntity<Object> authorizeUser(@RequestBody @Valid AuthorizationDto dto) {
         if (!authorizationService.checkAuthorization(dto.getLogin(),dto.getPassword())) {
             return ResponseEntity.status(401).build(); // 401 Unauthorized
         }

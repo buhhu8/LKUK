@@ -16,12 +16,11 @@ public class AuthorizationService {
     private final JpaUserAuthorizationRepository jpaUserAuthorizationRepository;
 
     public Boolean checkAuthorization(String login, String password) {
-        AuthorizationDto authorizationDto = jpaUserAuthorizationRepository.findByLogin(login)
-                .map(entity -> modelMapper.map(entity, AuthorizationDto.class))
-                .orElseThrow(() -> new RuntimeException("User not found with login " + login));
-        return authorizationDto.getLogin().equals(login)
-                && passwordEncoder.matches(password, authorizationDto.getPassword());
-
+            AuthorizationDto authorizationDto = jpaUserAuthorizationRepository.findByLogin(login)
+                    .map(entity -> modelMapper.map(entity, AuthorizationDto.class))
+                    .orElseThrow(() -> new RuntimeException("User not found with login " + login));
+            return authorizationDto.getLogin().equals(login)
+                    && passwordEncoder.matches(password, authorizationDto.getPassword());
     }
 
     public Integer returnId(String login) {
