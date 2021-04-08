@@ -1,7 +1,7 @@
 package org.lk.service;
 
 import lombok.AllArgsConstructor;
-import org.lk.model.domain.AuthorizationSessionEntity;
+import org.lk.model.domain.SessionEntity;
 import org.lk.model.dto.SessionDto;
 import org.lk.repository.jpa.JpaSessionRepository;
 import org.modelmapper.ModelMapper;
@@ -23,7 +23,7 @@ public class SessionService {
         dto.setUserId(id);
         dto.setSessionId(sessionId);
         dto.setAuthorizationExpiredDate(LocalDate.now().plusDays(1));
-        jpaSessionRepository.save(modelMapper.map(dto, AuthorizationSessionEntity.class));
+        jpaSessionRepository.save(modelMapper.map(dto, SessionEntity.class));
         return sessionId;
     }
 

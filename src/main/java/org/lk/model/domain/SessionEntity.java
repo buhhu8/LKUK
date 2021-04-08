@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Table(name = "authorization_session")
-public class AuthorizationSessionEntity {
+public class SessionEntity {
 
     @Id
     @Column(name = "user_id")
