@@ -66,50 +66,47 @@ class WaterServiceTest {
         assertThrows(RuntimeException.class, ()-> waterService.findWaterByDate(1,LocalDate.of(2021,04,06)) );
     }
 
-//    @Test
-//    public void testFindAllWaterById_waterExists_returnMappedDto() {
-//
-//        WaterDto dto = createDto();
-//        WaterEntity entity = createEntity();
-//        List<WaterDto> expectedResult = new ArrayList<WaterDto>();
-//        List<WaterEntity> entityList = new ArrayList<WaterEntity>();
-//        expectedResult.add(dto);
-//        entityList.add(entity);
-//
-//        when(jpaWaterRepository.findAllById(1))
-//                .thenReturn(entityList);
-//        when(entityList.stream().map(x->  modelMapper.map(x,WaterDto.class))
-//                .collect(Collectors.toList()))
-//                .thenReturn(expectedResult);
-//
-//        List<WaterDto> result = waterService.findAllWaterById(1);
-//
-//        assertEquals(expectedResult,result);
-//
-//    }
+    @Test
+    public void testFindAllWaterById_waterExists_returnMappedDto() {
 
-//    @Test
-//    public void testFindAllWaterById_waterDoesNotExist_returnNullList(){
-//        List<WaterEntity> expectedResult = new ArrayList<>();
-//        when(jpaWaterRepository.findAllById(1))
-//                .thenReturn(expectedResult);
-//        List<WaterDto> result = waterService.findAllWaterById(1);
-//        assertTrue(result.isEmpty());
-//    }
+        WaterDto dto = createDto();
+        WaterEntity entity = createEntity();
+        List<WaterDto> expectedResult = new ArrayList<WaterDto>();
+        List<WaterEntity> entityList = new ArrayList<WaterEntity>();
+        expectedResult.add(dto);
+        entityList.add(entity);
+
+        when(jpaWaterRepository.findAllById(1))
+                .thenReturn(entityList);
+
+        List<WaterDto> result = waterService.findAllWaterById(1);
+
+        assertEquals(expectedResult,result);
+
+    }
+
+    @Test
+    public void testFindAllWaterById_waterDoesNotExist_returnNullList(){
+        List<WaterEntity> expectedResult = new ArrayList<>();
+        when(jpaWaterRepository.findAllById(1))
+                .thenReturn(expectedResult);
+        List<WaterDto> result = waterService.findAllWaterById(1);
+        assertTrue(result.isEmpty());
+    }
 
 
 
     @Test
     public void testInsertWater_validData_saveEntity() {
-        WaterDto dto = createDto();
-        WaterEntity entity = createEntity();
-        InfoEntity infoEntity = createInfoEntity();
-        when(userInfoRepository.getOne(1))
-                .thenReturn(infoEntity);
-
-        InfoEntity result = userInfoRepository.getOne(1);
-
-        assertEquals(infoEntity, result);
+//        WaterDto dto = createDto();
+//        WaterEntity entity = createEntity();
+//        InfoEntity infoEntity = createInfoEntity();
+//        when(userInfoRepository.getOne(1))
+//                .thenReturn(infoEntity);
+//
+//        InfoEntity result = userInfoRepository.getOne(1);
+//
+//        assertEquals(infoEntity, result);
         verify(userInfoRepository).getOne(1);
        // verify(jpaWaterRepository).save(entity);
 

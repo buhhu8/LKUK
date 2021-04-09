@@ -7,6 +7,7 @@ import org.lk.model.dto.SessionDto;
 import org.lk.repository.jpa.JpaSessionRepository;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
@@ -17,6 +18,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.booleanThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,22 +56,31 @@ class SessionServiceTest {
     @Test
     public void testGenerateSessionId_returnString() {
 
-        String expectedResult = "123";
-
-
-
-        String result = sessionService.generateSessionId();
-
-        assertEquals(expectedResult,result);
 
     }
 
     @Test
     public void testIsExpired_sessionIsNotExpired_returnBoolean() {
+        SessionEntity entity = createEntity();
+        when(jpaSessionRepository.findBySessionId("1"))
+                .thenReturn(Optional.of(entity));
 
-
+        boolean result = sessionService.isExpired("1");
+        assertEquals(false,result);
 
     }
+
+    @Test
+    public void testIsExpired_sessionIsExpired_returnBoolean(){
+        SessionEntity entity = createEntity();
+        entity.setAuthorizationExpiredDate(LocalDate.now());
+        when(jpaSessionRepository.findBySessionId("1"))
+                .thenReturn(Optional.of(entity));
+
+        boolean result = sessionService.isExpired("1");
+        assertEquals(true,result);
+    }
+
 
     public SessionEntity createEntity(){
         SessionEntity entity = new SessionEntity();
