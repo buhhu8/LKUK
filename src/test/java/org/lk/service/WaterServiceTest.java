@@ -98,17 +98,13 @@ class WaterServiceTest {
 
     @Test
     public void testInsertWater_validData_saveEntity() {
-//        WaterDto dto = createDto();
-//        WaterEntity entity = createEntity();
-//        InfoEntity infoEntity = createInfoEntity();
-//        when(userInfoRepository.getOne(1))
-//                .thenReturn(infoEntity);
-//
-//        InfoEntity result = userInfoRepository.getOne(1);
-//
-//        assertEquals(infoEntity, result);
-        verify(userInfoRepository).getOne(1);
-       // verify(jpaWaterRepository).save(entity);
+
+        WaterEntity entity = createEntity();
+        when(jpaWaterRepository.save(entity)).thenReturn(entity);
+
+        waterService.insertWater(entity.getUserInfo().getInfoUserId(),entity.getHot(),entity.getCold());
+
+        verify(jpaWaterRepository).save(entity);
 
     }
 
@@ -127,6 +123,7 @@ class WaterServiceTest {
         entity.setCold("12");
         entity.setHot("23");
         entity.setDateWater(LocalDate.of(2021,04,06));
+        entity.setUserInfo(createInfoEntity());
         return entity;
     }
 
@@ -134,6 +131,7 @@ class WaterServiceTest {
         InfoEntity infoEntity = new InfoEntity();
         infoEntity.setFirstName("Den");
         infoEntity.setLastName("sd");
+        infoEntity.setInfoUserId(1);
         return infoEntity;
 
     }

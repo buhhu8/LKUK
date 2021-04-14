@@ -18,8 +18,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.booleanThat;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,25 +36,24 @@ class SessionServiceTest {
     private SessionService sessionService;
 
 
-
     @Test
     void testSaveSessionId_idFound_returnString() {
 
         SessionEntity entity = createEntity();
-        SessionDto dto = new SessionDto();
-        Integer expectedResult  = 1;
+        SessionDto dto = createDto(1);
         when(modelMapper.map(dto, SessionEntity.class))
                 .thenReturn(entity);
 
         String result = sessionService.saveSessionId(1);
-        assertEquals(expectedResult,result);
-
+        assertTrue(result != null);
+        verify(jpaSessionRepository).save(entity);
 
     }
 
     @Test
     public void testGenerateSessionId_returnString() {
 
+        assertTrue(sessionService.generateSessionId() != null);
 
     }
 
@@ -66,23 +64,31 @@ class SessionServiceTest {
                 .thenReturn(Optional.of(entity));
 
         boolean result = sessionService.isExpired("1");
-        assertEquals(false,result);
+        assertEquals(false, result);
 
     }
 
     @Test
-    public void testIsExpired_sessionIsExpired_returnBoolean(){
+    public void testIsExpired_sessionIsExpired_returnBoolean() {
         SessionEntity entity = createEntity();
         entity.setAuthorizationExpiredDate(LocalDate.now());
         when(jpaSessionRepository.findBySessionId("1"))
                 .thenReturn(Optional.of(entity));
 
         boolean result = sessionService.isExpired("1");
-        assertEquals(true,result);
+        assertEquals(true, result);
     }
 
 
-    public SessionEntity createEntity(){
+    public SessionDto createDto(Integer id){
+        SessionDto dto = new SessionDto();
+        dto.setUserId(id);
+        dto.setSessionId("123231");
+        dto.setAuthorizationExpiredDate(LocalDate.now().plusDays(1));
+        return dto;
+    }
+
+    public SessionEntity createEntity() {
         SessionEntity entity = new SessionEntity();
         entity.setAuthorizationExpiredDate(LocalDate.now().plusDays(1));
         entity.setSessionId("123");
