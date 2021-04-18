@@ -7,25 +7,24 @@ import org.lk.model.domain.WaterEntity;
 import org.lk.model.dto.WaterDto;
 import org.lk.repository.jpa.JpaUserInfoRepository;
 import org.lk.repository.jpa.JpaWaterRepository;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.modelmapper.ModelMapper;
-import org.springframework.ui.ModelMap;
 
-import javax.swing.text.html.parser.Entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.ArgumentMatchers.notNull;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -78,6 +77,8 @@ class WaterServiceTest {
 
         when(jpaWaterRepository.findAllById(1))
                 .thenReturn(entityList);
+        when(modelMapper.map(entity, WaterDto.class))
+                .thenReturn(dto);
 
         List<WaterDto> result = waterService.findAllWaterById(1);
 
@@ -94,20 +95,22 @@ class WaterServiceTest {
         assertTrue(result.isEmpty());
     }
 
-
-
     @Test
     public void testInsertWater_validData_saveEntity() {
 
         WaterEntity entity = createEntity();
-        when(jpaWaterRepository.save(entity)).thenReturn(entity);
+        //when(jpaWaterRepository.save(entity)).thenReturn(entity);
+        Mockito.when(userInfoRepository.getOne(entity.getUserInfo().getInfoUserId()))
+                .thenReturn(entity.getUserInfo());
 
-        waterService.insertWater(entity.getUserInfo().getInfoUserId(),entity.getHot(),entity.getCold());
+        waterService.insertWater(entity.getUserInfo().getInfoUserId(), entity.getHot(),entity.getCold());
 
-        verify(jpaWaterRepository).save(entity);
+        ArgumentCaptor<WaterEntity> captor = ArgumentCaptor.forClass(WaterEntity.class);
+        Mockito.verify(jpaWaterRepository).save(captor.capture()); // ArgumentMatchers.any();
 
+        WaterEntity saveEntity = captor.getValue();
+        assertEquals(entity.getUserInfo().getInfoUserId(), saveEntity.getUserInfo().getInfoUserId());
     }
-
 
     public WaterDto createDto(){
         WaterDto dto = new WaterDto();
