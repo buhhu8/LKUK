@@ -1,0 +1,25 @@
+# server.port=8023
+server.port: 5697
+# lk.application.property1=304
+# lk.application.property2=345
+#lk:
+#  application:
+#    property1: 304
+#    property2: 345
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/project-lk-uk
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 0280829Denis
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+
+#show_sql: false
+#    properties:
+#      hibernate:
+#        format_sql: false
+#migration:
+#  version: 17.01.2021.1

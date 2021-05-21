@@ -1,44 +1,34 @@
 package org.lk.controller;
 
-import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.lk.model.dto.AuthorizationDto;
+import org.lk.service.AuthorizationService;
+import org.lk.service.SessionService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
-
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/authorization")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/authorization")
 public class AuthorizationController {
 
-    boolean resultOfFindingLoginAndPassword;
-    Map<String, String> loginAndPassword = new HashMap<>();
+    private final AuthorizationService authorizationService;
+    private final SessionService sessionService;
 
-    @PostMapping("/login")
-    public Greeting authentication(@RequestBody AuthorizaitonRequest request) {
-
-        Greeting obj = new Greeting();
-
-        resultOfFindingLoginAndPassword = loginAndPassword.entrySet().stream()
-                .anyMatch(x -> x.getKey().equals(request.getLogin()) && x.getValue().equals(md5ApacheExample(request.getPassword())));
-
-        obj.setPairs(resultOfFindingLoginAndPassword ? "User was found" : "User not found");
-        return obj;
+    @PostMapping
+    public ResponseEntity<Object> authorizeUser(@RequestBody @Valid AuthorizationDto dto) {
+        if (!authorizationService.checkAuthorization(dto.getLogin(),dto.getPassword())) {
+            return ResponseEntity.status(401).build(); // 401 Unauthorized
+        }
+        String sessionId = sessionService.saveSessionId(authorizationService.returnId(dto.getLogin()));
+        return ResponseEntity.ok()
+                .header("SESSION-ID", sessionId)
+                .header("USER-ID",String.valueOf(authorizationService.returnId(dto.getPassword())))
+                .build(); // 200 with empty body
     }
 
-    private String md5ApacheExample(String text) {
-        return DigestUtils.md5DigestAsHex(text.getBytes());
-    }
-
-    @PostConstruct
-    public void init() {
-
-        loginAndPassword.put("buhhu8", "d8578edf8458ce06fbc5bb76a58c5ca4");  //qwerty
-        loginAndPassword.put("dmitry", "912ec803b2ce49e4a541068d495ab570");  //asdf
-        loginAndPassword.put("anton", "fd2cc6c54239c40495a0d3a93b6380eb");  //zxcv
-    }
 }
